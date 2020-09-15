@@ -40,6 +40,21 @@ router.patch('/:id', async (req, res) => {
   }
 });
 
+router.put('/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const student = await studentModel.findOneAndUpdate(id, req.body, {
+      new: true,
+    });
+    res.send(student);
+    console.log('UPDATE');
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(error);
+  }
+});
+
 router.delete('/:id', async (req, res) => {
   try {
     const id = req.params.id;
